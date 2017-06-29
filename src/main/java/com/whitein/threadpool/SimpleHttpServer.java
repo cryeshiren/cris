@@ -14,7 +14,7 @@ import java.net.Socket;
  */
 public class SimpleHttpServer {
     //处理http请求线程池
-    static ThreadPool<HttpRequestHandler> threadPool = new DefaultThreadPool<HttpRequestHandler>(1);
+    static ThreadPool<HttpRequestHandler> threadPool = new DefaultThreadPool<HttpRequestHandler>(5);
     //服务器文件地址即根地址
     static String basePath;
     private static ServerSocket serverSocket;
@@ -38,13 +38,13 @@ public class SimpleHttpServer {
     public static void start() throws Exception {
         serverSocket = new ServerSocket(port);
         SimpleHttpServer.setBasePath("C:\\Users\\CR\\Desktop");
+        System.out.println("server start listening...");
         //客户端
         Socket socket = null;
         while( (socket = serverSocket.accept()) != null ){
             threadPool.execute(new HttpRequestHandler(socket));
         }
-
-
+        serverSocket.close();
     }
 
     static class HttpRequestHandler implements Runnable {
@@ -73,8 +73,8 @@ public class SimpleHttpServer {
                     fileIn = new FileInputStream(path);
                     //字节输出流
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    byte[] i = new byte[1024 * 1024 * 8];
-                    while( (fileIn.read(i)) != -1 ){
+                    int i = 0;
+                    while((i = fileIn.read()) != -1){
                         baos.write(i);
                     }
                     byte[] bytes = baos.toByteArray();
@@ -98,6 +98,7 @@ public class SimpleHttpServer {
                 out.flush();
 
             } catch (IOException e) {
+                e.printStackTrace();
                 out.println("HTTP/1.1 500");
                 out.println("");
                 out.flush();
@@ -121,7 +122,10 @@ public class SimpleHttpServer {
             }
         }
     }
-
+    @Test
+    public void testServer() throws Exception {
+        SimpleHttpServer.start();
+    }
 }
 
 
