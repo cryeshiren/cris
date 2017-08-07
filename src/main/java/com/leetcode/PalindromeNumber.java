@@ -41,29 +41,20 @@ package com.leetcode;
 public class PalindromeNumber {
 	
 	public static boolean isPalindrome(int x) {
-        if( (x<10 && x>=0) || (x<0 && x > -10) ){
-        	return true;
-        }
-        if( x<0 ){
-        	x = 0 - x;
-        }
-		try{
-        	int two = x+x;
-        	byte[] bytes = String.valueOf(two).getBytes();
-        	byte ff  = bytes[0];
-        	for (byte b : bytes) {
-				if( ff != b ){
-					return false;
-				}
-			}
-        	return true;
-        }catch(Exception e){
-        	
-        }
-		return false;
-    }
-	
+		return ( x >= 0 && x == reverse(x) );
+	}
+
+    public static int reverse( int x ){
+		int y = 0;
+
+		while ( x != 0 ) {
+			y = y * 10 + x % 10;
+			x /= 10;
+		}
+
+		return y;
+	}
 	public static void main(String[] args) {
-		System.out.println(isPalindrome(-121));
+		System.out.println(isPalindrome(121 ));
 	}
 }

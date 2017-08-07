@@ -13,7 +13,7 @@ public class Cache {
     private ReentrantReadWriteLock rrw = new ReentrantReadWriteLock();
     private Lock readLock = rrw.readLock();
     private Lock writeLock = rrw.writeLock();
-    private Map<String, Object> cache = new HashMap<>();
+    private Map<String, Object> cache = new HashMap<String, Object>();
 
     public Object get( String key ){
         readLock.lock();
