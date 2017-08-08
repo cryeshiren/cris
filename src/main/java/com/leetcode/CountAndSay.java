@@ -32,20 +32,8 @@ public class CountAndSay {
         if( n<=0 ){
             return "";
         }
-        StringBuffer sb = new StringBuffer("1");
-        StringBuffer temp = new StringBuffer("1");
-        String result = "";
-        for( int i = 0; i<n; i++ ){
-            for( int j = 0; j<sb.length(); j++ ){
-                if( temp.indexOf(sb.charAt(j)+"") != -1 ){
-                    result.concat(temp.length()+temp.charAt(0)+"");
-                    temp.setLength(0);
-                }else{
-                    temp.append(sb.charAt(j)+"");
-                }
-            }
-        }
-        return result;
+
+        return "";
     }
 
     @Test
