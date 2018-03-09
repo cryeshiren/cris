@@ -3,7 +3,19 @@
   <groupId>cris</groupId>
   <artifactId>cris</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>cris</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <name>cris</name>
   <description>learn more,write less</description>
 
   <dependencies>

@@ -29,11 +29,45 @@ import org.junit.Test;
  */
 public class CountAndSay {
     public String countAndSay(int n) {
-        if( n<=0 ){
+        String result = "1";
+        if (n <= 0) {
             return "";
         }
 
-        return "";
+        while (n>1) {
+            result = aa(result);
+
+            n--;
+        }
+
+        return result;
+    }
+
+    public String aa(String qq) {
+        char[] arr = qq.toCharArray();
+
+        if(arr.length == 1){
+            return "11";
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        int temp = 0;
+
+        for(int i = 1; i<arr.length; i++){
+            if(arr[i]==arr[i-1]){
+                temp++;
+            }else{
+                sb.append(temp+1);
+                sb.append(arr[i-1]);
+                temp = 0;
+            }
+        }
+
+        sb.append(temp+1);
+        sb.append(arr[arr.length-1]);
+
+        return sb.toString();
     }
 
     @Test
